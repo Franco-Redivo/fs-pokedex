@@ -53,7 +53,6 @@ module.exports = [
         ...globals.browser,
         ...globals.es6,
         ...globals.jestm,
-        ...globals.node
       }
     },
     settings: {
