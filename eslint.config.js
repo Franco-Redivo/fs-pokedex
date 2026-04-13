@@ -52,7 +52,8 @@ module.exports = [
       globals: {
         ...globals.browser,
         ...globals.es6,
-        ...globals.jest
+        ...globals.jestm,
+        ...globals.node
       }
     },
     settings: {
@@ -70,7 +71,6 @@ module.exports = [
       'no-trailing-spaces': 'error',
       'object-curly-spacing': ['error', 'always'],
       'arrow-spacing': ['error', { 'before': true, 'after': true }],
-      'no-console': 'error',
       'react/prop-types': 0
     }
   }
