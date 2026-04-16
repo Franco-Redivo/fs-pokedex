@@ -24,7 +24,7 @@ describe('Pokedex', () => {
   test('next pokemon details can be opened', async ({ page }) => {
     await page.goto('')
     await page.getByRole('link', { name: 'ivysaur' }).click()
-    await page.getByRole('button', { name: 'next' }).click()
+    await page.getByRole('link', { name: 'next' }).click()
     await expect(page.getByText('venusaur')).toBeVisible()
   });
 });
