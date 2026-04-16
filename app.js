@@ -10,6 +10,7 @@ const start = async () => {
   await app.listen(PORT)
   console.log(`server started on port ${PORT}`)
 
+  // add a couple of endpoints for health checks and version checks, so that we can monitor the deployed app and trigger redeploys when needed.
   app.get('/health', (req, res) => {
     res.send('ok')
   })
