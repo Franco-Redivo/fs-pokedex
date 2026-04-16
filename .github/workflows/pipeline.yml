@@ -27,4 +27,5 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
+        if: ${{ github.event_name == 'push' }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK}}
