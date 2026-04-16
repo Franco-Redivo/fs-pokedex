@@ -26,8 +26,9 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+      # If any pushed commit message contains #skip, do not run deploy.
       - name: Deploy
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK}}
         
   tag_release:
