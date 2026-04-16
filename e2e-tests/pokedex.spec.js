@@ -12,4 +12,12 @@ describe('Pokedex', () => {
     await page.getByRole('link', { name: 'ivysaur' }).click()
     await expect(page.getByText('chlorophyll')).toBeVisible()
   });
-})
+
+  test('front page can be opened from pokemon details', async ({ page }) => {
+    await page.goto('')
+    await page.getByRole('link', { name: 'ivysaur' }).click()
+    await page.getByRole('link', { name: 'home' }).click()
+    await expect(page.getByText('ivysaur')).toBeVisible()
+    await expect(page.getByText('chlorophyll')).not.toBeVisible()
+  });
+});
