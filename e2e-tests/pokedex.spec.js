@@ -1,5 +1,6 @@
 import { test, describe, expect } from '@playwright/test'
 
+/// This test suite is meant to be run against the deployed version of the app, not the local development server. To run it, set the PLAYWRIGHT_BASE_URL environment variable to the URL of the deployed app, and then run `npm test` or `npx playwright test`.
 describe('Pokedex', () => {
   test('front page can be opened', async ({ page }) => {
     await page.goto('')
