@@ -1,4 +1,4 @@
-name: Deploy Pipeline
+name: Pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]  
 
 jobs:
-  simple_deployment_pipeline:
+  build and test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,23 +26,38 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+
+  deploy:
+    needs: [build and test]
+    runs-on: ubuntu-latest
+    steps:
       # If any pushed commit message contains #skip, do not run deploy.
       - name: Deploy
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK}}
+
+  notify_success:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
       - name: Discord notification success
         if: ${{ success() }}
         uses: sarisia/actions-status-discord@v1.16.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: Discord notification failure
-        if: ${{ failure() }}
-        uses: sarisia/actions-status-discord@v1.16.0
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+  notify_failure:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Discord notification failure
+      if: ${{ failure() }}
+      uses: sarisia/actions-status-discord@v1.16.0
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_release:
-    needs: [simple_deployment_pipeline]
+    needs: [deploy]
     runs-on: ubuntu-latest
     permissions:
       contents: write
