@@ -35,13 +35,11 @@ jobs:
         if: ${{ success() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK}}
-          description: 'Deployment successful!'
       - name: Discord notification failure
         uses: sarisia/actions-status-discord@v1.16.0
         if: ${{ failure() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK}}
-          description: 'Deployment failed!'
         
   tag_release:
     needs: [simple_deployment_pipeline]
