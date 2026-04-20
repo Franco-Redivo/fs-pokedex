@@ -35,7 +35,7 @@ jobs:
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_MESSAGE: "Deployment successful! 🎉"
+          DISCORD_MESSAGE: "Deployment successful! "
 
       - name: Discord notification failure
         if: ${{ failure() }}
