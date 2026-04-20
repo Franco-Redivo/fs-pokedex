@@ -32,18 +32,15 @@ jobs:
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK}}
       - name: Discord notification success
         if: ${{ success() }}
-        uses: Ilshidur/action-discord@master
+        uses: sarisia/actions-status-discord@v1.16.0
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_MESSAGE: "Deployment successful! "
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Discord notification failure
         if: ${{ failure() }}
-        uses: Ilshidur/action-discord@master
+        uses: sarisia/actions-status-discord@v1.16.0
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_MESSAGE: "Deployment failed! commit: ${{ github.sha }}. See details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-        
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
