@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]  
 
 jobs:
-  build and test:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
   deploy:
-    needs: [build and test]
+    needs: [build_and_test]
     runs-on: ubuntu-latest
     steps:
       # If any pushed commit message contains #skip, do not run deploy.
