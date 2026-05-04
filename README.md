@@ -2,6 +2,14 @@
 
 This repository is used for the CI/CD module of the Full Stack Open course
 
+## Deployed version
+
+https://fs-pokedex-2uk6.onrender.com
+
+## App repository for exercises 22-23
+
+https://github.com/Franco-Redivo/create-app
+
 ## Commands
 
 Start by running `npm install` inside the project folder
